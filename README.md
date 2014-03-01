@@ -47,10 +47,13 @@ define(['jquery', 'ajaxfeedback'], function ($) {
 
 How to use
 ----
-1. Create a placeholder element (such as <div id="messages"></div>)
+1. Create a placeholder element.
+```html
+<div id="messages"></div>
+```
 2. Create a file to return JSON data.
 3. Load jQuery.
-4. Load the **AjaxFeedback** plugin, something like:
+4. Load the **AjaxFeedback** plugin.
 ```html
 <script type="text/javascript" src="js/ajaxfeedback.js"></script>
 ```
@@ -64,7 +67,7 @@ $(document).ready(function () {
     });
 });
 ```
-5. Fire your application
+6. Fire your application
 
 #### Example
 

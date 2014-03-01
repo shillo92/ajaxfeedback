@@ -1,0 +1,8 @@
+{
+  "volo": {
+    "dependencies": {
+      "require": "github:jrburke/requirejs/2.1.11",
+      "jquery": "github:jquery/jquery/2.1.0"
+    }
+  }
+}

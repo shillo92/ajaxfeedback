@@ -1,0 +1,24 @@
+{
+    "messages" : {
+        "error" : {
+            "email" : [
+                "Invalid email address supplied"
+            ],
+            "username" : [
+                "Invalid username. Username can only contain alphabetic characters."
+            ]
+        },
+
+        "success" : {
+            "country" : [
+                "Well, at least you specified a valid country name."
+            ]
+        },
+
+        "info" : {
+            "password" : [
+                "Tip: you should specify a good password!"
+            ]
+        }
+    }
+}

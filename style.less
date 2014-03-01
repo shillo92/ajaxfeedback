@@ -1,0 +1,42 @@
+@import "http://necolas.github.io/normalize.css/3.0.0/normalize.css";
+
+@color-sidebar: #374d64;
+@color-sidebar-button: #2c3e50;
+@color-sidebar-separator: lighten(@color-sidebar-button, 10%);
+@color-error: #f2dede;
+@color-error-text: #c95051;
+@color-success: #dff0d8;
+@color-success-text: #387857;
+@color-info: #d9edf7;
+@color-info-text: #3a87b2;
+
+.menu-clean() {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.messages {
+  .menu-clean();
+}
+
+.msg (@bgcolor, @txtcolor) {
+  margin: 5px 0;
+  list-style-type: none;
+  background-color: @bgcolor;
+  color: @txtcolor;
+  padding: 10px;
+}
+.msg-error {
+  .msg(@color-error, @color-error-text);
+}
+.msg-success {
+  .msg(@color-success, @color-success-text);
+}
+.msg-info {
+  .msg(@color-info, @color-info-text);
+}
+
+#messages {
+  width: 80%;
+}

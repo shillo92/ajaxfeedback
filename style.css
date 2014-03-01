@@ -1,0 +1,30 @@
+@import "http://necolas.github.io/normalize.css/3.0.0/normalize.css";
+.messages {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.msg-error {
+  margin: 5px 0;
+  list-style-type: none;
+  background-color: #f2dede;
+  color: #c95051;
+  padding: 10px;
+}
+.msg-success {
+  margin: 5px 0;
+  list-style-type: none;
+  background-color: #dff0d8;
+  color: #387857;
+  padding: 10px;
+}
+.msg-info {
+  margin: 5px 0;
+  list-style-type: none;
+  background-color: #d9edf7;
+  color: #3a87b2;
+  padding: 10px;
+}
+#messages {
+  width: 80%;
+}

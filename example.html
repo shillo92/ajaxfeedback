@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AjaxFeedback Example</title>
+    <script type="text/javascript" data-main="js/main.js" src="js/require.js">
+        requirejs.config({
+            urlArgs: "nocache=true"
+        });
+    </script>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Pressing this button will fetch and display messages from JSON file -->
+<button type="button" id="showMessages">Show Messages</button>
+
+<!-- We'll attach all messages to this div -->
+<div id="messages"></div>
+
+</body>
+</html>

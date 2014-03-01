@@ -1,0 +1,9 @@
+{
+    "main" : "js/main",
+    "volo" : {
+        "dependencies" : {
+            "jquery" : "jquery",
+            "ignore" : ["data/*.*", "example.html", "style.less", "style.css"]
+        }
+    }
+}

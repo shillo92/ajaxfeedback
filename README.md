@@ -50,7 +50,10 @@ How to use
 1. Create a placeholder element (such as <div id="messages"></div>)
 2. Create a file to return JSON data.
 3. Load jQuery.
-4. Load the **AjaxFeedback** plugin (Something like <script type="text/javascript" src="js/ajaxfeedback.js"></script>).
+4. Load the **AjaxFeedback** plugin, something like:
+```html
+<script type="text/javascript" src="js/ajaxfeedback.js"></script>
+```
 5. Within your main javascript code, make the following call to the plugin:
 ```javascript
 $(document).ready(function () {

@@ -52,8 +52,7 @@ How to use
 <div id="messages"></div>
 ```
 * Create a file to return JSON data.
-* Load jQuery.
-( Load the **AjaxFeedback** plugin.
+* Load jQuery (Load the **AjaxFeedback** plugin).
 ```html
 <script type="text/javascript" src="js/ajaxfeedback.js"></script>
 ```

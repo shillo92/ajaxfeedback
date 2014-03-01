@@ -1,5 +1,7 @@
 {
-    "main" : "js/main",
+    "name" : "ajaxfeedback",
+    "title" : "AjaxFeedback",
+    "main" : "js/ajaxfeedback.js",
     "volo" : {
         "url": "https://github.com/shillo92/ajaxfeedback/blob/{version}/js/ajaxfeedback.js",
         "dependencies" : {

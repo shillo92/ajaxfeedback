@@ -1,7 +1,7 @@
 {
     "name" : "ajaxfeedback",
     "title" : "AjaxFeedback",
-    "version" : "v0.2",
+    "version" : "v0.1",
     "main" : "js/ajaxfeedback.js",
     "volo" : {
         "url": "https://github.com/shillo92/ajaxfeedback/blob/{version}/js/ajaxfeedback.js",

@@ -1,9 +1,9 @@
 {
     "main" : "js/main",
     "volo" : {
+        "url": "https://github.com/shillo92/ajaxfeedback/blob/{version}/js/ajaxfeedback.js",
         "dependencies" : {
-            "jquery" : "jquery",
-            "ignore" : ["data/*.*", "example.html", "style.less", "style.css"]
+            "jquery" : "jquery"
         }
     }
 }

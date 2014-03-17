@@ -15,11 +15,13 @@ $.fn.extend({
      * @param options You must specify a 'returnedData' option since it provides the data returned from the JSON response.
      * @constructor
      * @throws If no 'returnedData' option specified.
+     *         If JSON file could not be loaded.
      */
     ajaxFeedback : function (options) {
         var settings = $.extend({
             /**
              * The data returned from the JSON response to the AJAX request.
+             * Notice that a data-url/data-data attributes will override this setting.
              */
             returnedData : null,
 
@@ -70,26 +72,72 @@ $.fn.extend({
              */
             messageHide : function () {
                 this.fadeOut();
-            }
+            },
+
+            /**
+             * If specified, the data will be specified in this target element rather in this element.
+             */
+            target : null,
+
+            /**
+             * Will be used as part of each message class name.
+             * Used in cases where a raw String is returned rather than array of messages, where the type of the message
+             * cannot be told. By default "error" is used.
+             */
+            defaultMessageType : "error"
         }, options);
 
-        if (!settings.returnedData) {
-            throw "You must specify a returnedData option in AjaxFeedback";
+        var $this           = $(this);
+        var returnedData    = settings.returnedData;
+        var messageType     = settings.defaultMessageType;
+        var dataUrl         = $this.data('url');
+        var dataData        = $this.data('data');
+        var dataMsgType     = $this.data('messagetype');
+
+        if (dataUrl) {
+            $.ajax({
+                url: dataUrl,
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    returnedData = data;
+                },
+                error: function(jqxhr, message) {
+                    throw "AjaxFeedback Could not load the JSON file, received the following message: "+message
+                }
+            });
+        } else if (dataData) {
+            returnedData = dataData;
+            messageType  = (dataMsgType) ? dataMsgType : messageType;
+        } else if (!returnedData) {
+            throw "You must specify a returnedData option in AjaxFeedback or data-url/data-data attributes.";
         }
 
-        var messages = ExtractMessages(settings.returnedData);
-        var $this    = $(this);
+        var messages = null;
+
+        if (typeof(returnedData) === "string") {
+            messages = {};
+
+            // Dynamically set the property of the returnedData
+            messages[messageType] = {
+                "_" : [returnedData]
+            }
+        } else {
+            messages = ExtractMessages(returnedData);
+        }
+
+        var $target = (settings.target) ? $(settings.target) : $this;
 
         if (messages) {
             // Clear previous messages (if exist)
-            $this.empty();
+            $target.empty();
 
             $.each(messages, function (messagesType, inputMessages) {
                 // Using this classname it will be easier to style messages according to their type e.g: error,
                 // success, info
                 var classname = 'msg-'+messagesType+"-container";
                 var messagesContainerHtml = settings.formatMessagesContainer(classname);
-                var $messagesContainer = $(messagesContainerHtml).appendTo($this);
+                var $messagesContainer = $(messagesContainerHtml).appendTo($target);
 
                 // inputMessages is array of messages attached to input element such as <input type="text" />
                 $.each(inputMessages, function (inputName, inputMessage) {

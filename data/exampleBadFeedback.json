@@ -1,0 +1,14 @@
+{
+    "messages" : {
+        "error" : {
+            "email" : [
+                "Invalid email address supplied"
+            ],
+            "username" : [
+                "Invalid username. Username can only contain alphabetic characters."
+            ]
+        }
+    },
+
+    "success" : false
+}

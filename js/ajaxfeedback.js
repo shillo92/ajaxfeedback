@@ -1,23 +1,20 @@
-/**
- * Extracts the messages from a JSON result.
- *
- * @param data
- * @returns {*}
- * @constructor
- */
-var ExtractMessages = function (data) {
-    return (data['messages']) ? data['messages'] : null;
-};
 $.fn.extend({
     /**
      * Makes a jQuery element a messenger for JSON messages sent over AJAX.
      *
      * @param options You must specify a 'returnedData' option since it provides the data returned from the JSON response.
+     * If you specify a `string` value, it will be used as the `returnedData` option.
      * @constructor
      * @throws If no 'returnedData' option specified.
      *         If JSON file could not be loaded.
      */
     ajaxFeedback : function (options) {
+        if (typeof options === "string") {
+            options = {
+                returnedData: options
+            };
+        }
+
         var settings = $.extend({
             /**
              * The data returned from the JSON response to the AJAX request.
@@ -84,8 +81,65 @@ $.fn.extend({
              * Used in cases where a raw String is returned rather than array of messages, where the type of the message
              * cannot be told. By default "error" is used.
              */
-            defaultMessageType : "error"
+            defaultMessageType : "error",
+
+            /**
+             * The name of the parameter returned from the JSON response (at the same level as the `messages` parameter),
+             * indicates whether there was a good feedback or bad feedback.
+             */
+            successIndicatorParam: "success",
+
+            /**
+             * Triggered after successful feedback, meaning that the boolean `success` parameter in the JSON response
+             * has positive (true) result.
+             *
+             * In the absence of success indicator parameter, these method will not be triggered.
+             *
+             * By default, this method does nothing.
+             *
+             * @param data The JSON data returned from the response.
+             */
+            onGoodFeedback: function(data) {
+            },
+
+            /**
+             * Triggered after bad feedback, meaning that the boolean `success` parameter in the JSON response
+             * has negative (false) result.
+             *
+             * In the absence of success indicator parameter, these method will not be triggered.
+             *
+             * By default, this method does nothing.
+             *
+             * @param data The JSON data returned from the response.
+             */
+            onBadFeedback: function(data) {
+            }
         }, options);
+
+        /**
+         * Extracts the messages from a JSON result.
+         *
+         * @param data
+         * @returns {*}
+         * @constructor
+         */
+        var ExtractMessages = function (data) {
+            return (data['messages']) ? data['messages'] : null;
+        };
+
+        /**
+         * Resolves the state of the success indicator and dispatches of either onGoodFeedback or onBadFeedback.
+         *
+         * @param data The JSON data.
+         * @constructor
+         */
+        var HandleSuccessIndicator = function(data) {
+            var indicator = data[settings.successIndicatorParam];
+
+            if (indicator != null) {
+                (indicator) ? settings.onGoodFeedback(data) : settings.onBadFeedback(data);
+            }
+        };
 
         var $this           = $(this);
         var returnedData    = settings.returnedData;
@@ -113,8 +167,11 @@ $.fn.extend({
             throw "You must specify a returnedData option in AjaxFeedback or data-url/data-data attributes.";
         }
 
+        HandleSuccessIndicator(returnedData);
+
         var messages = null;
 
+        // If we got a raw string for messages, convert it to an object of messages we can work with
         if (typeof(returnedData) === "string") {
             messages = {};
 

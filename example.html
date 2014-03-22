@@ -11,10 +11,19 @@
 </head>
 <body>
 
+<h3>Fetching Content</h3>
 <!-- Pressing this button will fetch and display messages from JSON file -->
 <button type="button" class="showMessage" data-url="data/exampleFromArray.json" id="showMessagesFromArray">Show Messages From JSON Array</button>
 <!-- JSON response can also be a single string to be used as a message. 'error' message by default -->
 <button type="button" class="showMessage" data-data="Simple string message" data-messagetype="success" id="showMessagesFromString">Show Message From JSON String</button>
+
+<h3>Bad Feedback Example</h3>
+<!-- Pressing this button will fetch and display messages from JSON file -->
+<button type="button" class="showMessage" data-url="data/exampleBadFeedback.json" id="showMessagesWithBadFeedback">
+Show Messages From JSON Array and handle bad feedback
+</button>
+
+<div id="successIndicator"></div>
 
 <!-- We'll attach all messages to this div -->
 <div id="messages"></div>

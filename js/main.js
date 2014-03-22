@@ -6,7 +6,10 @@ require(['jquery', 'ajaxfeedback'], function ($) {
             var url = $showMessageButtons.data('url');
             // Make our #messages div into feedbacks container
             $(this).ajaxFeedback({
-                target: '#messages'
+                target: '#messages',
+                onBadFeedback: function(data) {
+                    $("#successIndicator").ajaxFeedback("Invalid input, please try again!");
+                }
             });
         });
     });

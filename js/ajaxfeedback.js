@@ -1,3 +1,6 @@
+/**
+ * Version 0.3.1.
+ */
 $.fn.extend({
     /**
      * Makes a jQuery element a messenger for JSON messages sent over AJAX.
@@ -93,7 +96,7 @@ $.fn.extend({
              * Triggered after successful feedback, meaning that the boolean `success` parameter in the JSON response
              * has positive (true) result.
              *
-             * In the absence of success indicator parameter, these method will not be triggered.
+             * In the absence of success indicator parameter, this method will be triggered after every feedback.
              *
              * By default, this method does nothing.
              *
@@ -105,8 +108,6 @@ $.fn.extend({
             /**
              * Triggered after bad feedback, meaning that the boolean `success` parameter in the JSON response
              * has negative (false) result.
-             *
-             * In the absence of success indicator parameter, these method will not be triggered.
              *
              * By default, this method does nothing.
              *
@@ -136,9 +137,7 @@ $.fn.extend({
         var HandleSuccessIndicator = function(data) {
             var indicator = data[settings.successIndicatorParam];
 
-            if (indicator != null) {
-                (indicator) ? settings.onGoodFeedback(data) : settings.onBadFeedback(data);
-            }
+            (indicator !== false) ? settings.onGoodFeedback(data) : settings.onBadFeedback(data);
         };
 
         var $this           = $(this);

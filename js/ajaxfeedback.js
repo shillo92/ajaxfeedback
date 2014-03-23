@@ -100,9 +100,12 @@ $.fn.extend({
              *
              * By default, this method does nothing.
              *
+             * You can utilize the event.preventDefault in order to discontinue the functionality of ajaxfeedback.
+             *
+             * @param event jQuery 'ShowAjaxFeedback' event.
              * @param data The JSON data returned from the response.
              */
-            onGoodFeedback: function(data) {
+            onGoodFeedback: function(event, data) {
             },
 
             /**
@@ -111,9 +114,12 @@ $.fn.extend({
              *
              * By default, this method does nothing.
              *
+             * You can utilize the event.preventDefault in order to discontinue the functionality of ajaxfeedback.
+             *
+             * @param event jQuery 'ShowAjaxFeedback' event.
              * @param data The JSON data returned from the response.
              */
-            onBadFeedback: function(data) {
+            onBadFeedback: function(event, data) {
             }
         }, options);
 
@@ -131,13 +137,14 @@ $.fn.extend({
         /**
          * Resolves the state of the success indicator and dispatches of either onGoodFeedback or onBadFeedback.
          *
+         * @param event jQuery event.
          * @param data The JSON data.
          * @constructor
          */
-        var HandleSuccessIndicator = function(data) {
+        var HandleSuccessIndicator = function(event, data) {
             var indicator = data[settings.successIndicatorParam];
 
-            (indicator !== false) ? settings.onGoodFeedback(data) : settings.onBadFeedback(data);
+            (indicator !== false) ? settings.onGoodFeedback(event, data) : settings.onBadFeedback(event, data);
         };
 
         var $this           = $(this);
@@ -146,6 +153,7 @@ $.fn.extend({
         var dataUrl         = $this.data('url');
         var dataData        = $this.data('data');
         var dataMsgType     = $this.data('messagetype');
+        var event           = $.Event('ShowAjaxFeedback');
 
         if (dataUrl) {
             $.ajax({
@@ -166,8 +174,6 @@ $.fn.extend({
             throw "You must specify a returnedData option in AjaxFeedback or data-url/data-data attributes.";
         }
 
-        HandleSuccessIndicator(returnedData);
-
         var messages = null;
 
         // If we got a raw string for messages, convert it to an object of messages we can work with
@@ -178,8 +184,17 @@ $.fn.extend({
             messages[messageType] = {
                 "_" : [returnedData]
             }
+
+            // Transform it into empty object so HandleSuccessIndicator() can handle it
+            returnedData = {};
         } else {
             messages = ExtractMessages(returnedData);
+        }
+
+        HandleSuccessIndicator(event, returnedData);
+
+        if (event.isDefaultPrevented()) {
+            return;
         }
 
         var $target = (settings.target) ? $(settings.target) : $this;

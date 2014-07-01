@@ -7,7 +7,7 @@ require(['jquery', 'ajaxfeedback'], function ($) {
             // Make our #messages div into feedbacks container
             $(this).ajaxFeedback({
                 target: '#messages',
-                onBadFeedback: function(data) {
+                onBadFeedback: function(event, data) {
                     $("#successIndicator").ajaxFeedback("Invalid input, please try again!");
                 }
             });

@@ -1,0 +1,29 @@
+{
+  "name": "ajaxfeedback",
+  "version": "0.3.2",
+  "title": "Ajax Feedback",
+  "description" : "Simplifies handling with live AJAX messages using JSON.",
+  "keywords": [
+    "jquery",
+    "ajax",
+    "feedback",
+    "messages",
+    "json"
+    ],
+    "homepage" : "https://github.com/shillo92/ajaxfeedback",
+    "author" : {
+      "name" : "Shillo Ben David",
+      "url" : "http://shillogiveaways.blogspot.co.il"
+    },
+    "bugs" : "https://github.com/shillo92/ajaxfeedback/issues",
+    "licenses" : [
+      {
+        "type" : "GPL v2",
+        "url" : "https://raw.githubusercontent.com/shillo92/ajaxfeedback/master/LICENSE"
+      }
+      ],
+      "dependencies": {
+        "jquery": ">=1.4"
+      },
+      "docs" : "https://github.com/shillo92/ajaxfeedback/blob/master/README.md"
+}

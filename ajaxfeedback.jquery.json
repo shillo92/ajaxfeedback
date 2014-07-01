@@ -1,6 +1,6 @@
 {
   "name": "ajaxfeedback",
-  "version": "0.3.2",
+  "version": "v0.3.2",
   "title": "Ajax Feedback",
   "description" : "Simplifies handling with live AJAX messages using JSON.",
   "keywords": [

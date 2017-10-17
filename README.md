@@ -8,7 +8,9 @@ jQuery plugin for handling the display of JSON messages sent using AJAX in order
 Version
 ----
 
-**0.3.2**
+**0.3.3**
+
+0.3.2
 
 0.3.1
 
@@ -27,7 +29,7 @@ Installation
 --------------
 #### Through Volo
 ```sh
-volo add shillo92/ajaxfeedback 
+volo add shillo92/ajaxfeedback
 ```
 
 #### Through GitHub
@@ -257,5 +259,3 @@ GPL
 
 
 **This free plugin is provided to you by Shillo Ben David**
-
-    

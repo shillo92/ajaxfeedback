@@ -8,7 +8,9 @@ jQuery plugin for handling the display of JSON messages sent using AJAX in order
 Version
 ----
 
-**0.3.3**
+**0.3.4**
+
+0.3.3
 
 0.3.2
 
